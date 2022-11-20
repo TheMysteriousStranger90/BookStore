@@ -2,7 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using BookStore.Context;
+using BookStore.Interfaces;
+using BookStore.Mapping;
 using BookStore.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -29,8 +32,19 @@ namespace BookStore
         {
             services.AddTransient<IUserValidator<User>, CustomUserValidator>();
             
+            
+            var mapperConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new AutomapperProfile());
+            });
+            IMapper mapper = mapperConfig.CreateMapper();
+            services.AddSingleton(mapper);
+            
             services.AddDbContext<ApplicationContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            
+            
+            //services.AddTransient<IMailService, NullMailService>();
  
             services.AddIdentity<User, IdentityRole>(opts =>
                 {
@@ -44,6 +58,8 @@ namespace BookStore
                     opts.Password.RequireDigit = false; 
                 })
                 .AddEntityFrameworkStores<ApplicationContext>();
+            
+            
             
             
             

@@ -29,7 +29,6 @@ namespace BookStore.Context
             base.OnModelCreating(modelBuilder);
             
             modelBuilder.ApplyConfiguration(new OrderConfiguration());
-            
         }
     }
 }
