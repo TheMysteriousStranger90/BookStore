@@ -115,8 +115,6 @@ X
 (BookStore/Properties/launchSettings.json,b\8\b89a0c3fd5b5970d309d8c267189d59a549c3b47
 H
 BookStore/Models/Book.cs,c\e\cee67f453080dde83a60302be3dfb49851b6284e
-M
-BookStore/Models/OrderItem.cs,b\4\b41bfdd268350fe0c28cc9ca005557c86843d106
 `
 0BookStore/Models/ViewModels/EditUserViewModel.cs,8\5\8570ff88e77e8b459804794be21537a37a1baf94
 W
