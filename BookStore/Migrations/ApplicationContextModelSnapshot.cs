@@ -19,6 +19,14 @@ namespace BookStore.Migrations
                 .HasAnnotation("ProductVersion", "5.0.17")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("BookStore.Models.Author", b =>
+                {
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.ToTable("Author");
+                });
+
             modelBuilder.Entity("BookStore.Models.Book", b =>
                 {
                     b.Property<int>("Id")
@@ -50,6 +58,41 @@ namespace BookStore.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Books");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Genre = "Classic Literature & Fiction",
+                            Isbn = "978-0141441412",
+                            Language = "English",
+                            Price = 14m,
+                            Publisher = "Penguin Classics",
+                            Title = "Fyodor Dostoevsky - Demons",
+                            Year = 2008
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Genre = "Classic Literature & Fiction",
+                            Isbn = "978-1840227963",
+                            Language = "English",
+                            Price = 12m,
+                            Publisher = "Wordsworth Editions Ltd",
+                            Title = "Jane Austen - Emma",
+                            Year = 2020
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Genre = "Programming Languages",
+                            Isbn = "978-1484269381",
+                            Language = "English",
+                            Price = 28m,
+                            Publisher = "Apress",
+                            Title = "Andrew Troelsen, Phillip Japikse - Pro C# 9 with .NET 5: Foundational Principles and Practices in Programming 10th ed. Edition",
+                            Year = 2021
+                        });
                 });
 
             modelBuilder.Entity("BookStore.Models.Order", b =>
@@ -318,7 +361,7 @@ namespace BookStore.Migrations
             modelBuilder.Entity("BookStore.Models.OrderItem", b =>
                 {
                     b.HasOne("BookStore.Models.Book", "Book")
-                        .WithMany("Author")
+                        .WithMany()
                         .HasForeignKey("BookId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -383,11 +426,6 @@ namespace BookStore.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("BookStore.Models.Book", b =>
-                {
-                    b.Navigation("Author");
                 });
 
             modelBuilder.Entity("BookStore.Models.Order", b =>

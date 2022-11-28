@@ -1,5 +1,6 @@
 ﻿using BookStore.Configurations;
 using BookStore.Models;
+using BookStore.Seed;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -22,13 +23,25 @@ namespace BookStore.Context
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
             options.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=BookStoreDb;MultipleActiveResultSets=true");
+            
+            options.EnableSensitiveDataLogging();
         }
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
             
+            modelBuilder
+                .Entity<Author>(
+                    eb =>
+                    {
+                        eb.HasNoKey();
+                    });
+            
             modelBuilder.ApplyConfiguration(new OrderConfiguration());
+            modelBuilder.ApplyConfiguration(new BookConfiguration());
+            
+            RoleInitializer.SeedData(modelBuilder);
         }
     }
 }

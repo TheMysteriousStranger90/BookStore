@@ -19,8 +19,6 @@ m
 =BookStore/Migrations/20221120083629_InitialCreate.Designer.cs,c\0\c0ee5f9581eb9dc473cf9c36392c9f693c0a9b52
 g
 7BookStore/Views/Shared/_ValidationScriptsPartial.cshtml,d\1\d19bd3b699255a2e9e18b8a8e2948a4d0e089aa8
-g
-7BookStore/Migrations/ApplicationContextModelSnapshot.cs,e\c\ec9e7d0527eec855d119f519c030590fb3c141de
 S
 #BookStore/Views/Shared/Error.cshtml,7\2\723febf6848f960cf674a0961c8ba2b733986501
 `
@@ -47,8 +45,6 @@ _
 +BookStore/wwwroot/lib/jquery/dist/jquery.js,f\a\fa3d65687f74dfa8d5667ceb5c577b99f2bb3dda
 l
 <BookStore/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js.map,e\3\e301ff91616a0ce04fadf871269e4bfce6ea5e68
-J
-BookStore/Models/Author.cs,8\6\867954b93f6ae7b0a230f55e67b1ff7d7f791bfb
 s
 CBookStore/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map,7\e\7eb113bdae410b2be075e7a8896a0c886f77bd3c
 o
@@ -113,12 +109,8 @@ o
 BookStore.sln,9\7\9739efcb4c7172a0556e09a3957ea9c0210e4c3e
 X
 (BookStore/Properties/launchSettings.json,b\8\b89a0c3fd5b5970d309d8c267189d59a549c3b47
-H
-BookStore/Models/Book.cs,c\e\cee67f453080dde83a60302be3dfb49851b6284e
 `
 0BookStore/Models/ViewModels/EditUserViewModel.cs,8\5\8570ff88e77e8b459804794be21537a37a1baf94
-W
-'BookStore/Models/CustomUserValidator.cs,d\c\dcc0ebdb01b6ab3d8275f7a5ccdd9caf42333955
 b
 2BookStore/Models/ViewModels/ChangeRoleViewModel.cs,c\e\cea00978a41a294d988a958fa7fde73fcd2be377
 H
@@ -151,7 +143,5 @@ Q
 !BookStore/Views/Roles/Edit.cshtml,3\2\325d8a635b634aac01743d7f3c26c9419a8ec270
 R
 "BookStore/Views/Roles/Index.cshtml,9\d\9d28b84209bb42e34dec0ccd0731ac3d68b317ff
-D
-BookStore/Startup.cs,1\8\1813dc6395b3b50c8892e8cda7d557894199ba81
 U
 %BookStore/Views/Shared/_Layout.cshtml,3\d\3d593f65a52724d6ef572b02ffd8da98e0225929

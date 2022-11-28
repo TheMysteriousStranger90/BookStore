@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BookStore.Models
 {
@@ -6,7 +7,7 @@ namespace BookStore.Models
     {
         public int Id { get; set; }
         public string Title { get; set; }
-        public IEnumerable<OrderItem> Author { get; set; }
+        [NotMapped] public ICollection<Author> Author { get; set; }
         public int? Year { get; set; }
         public string Isbn { get; set; }
         public string Publisher { get; set; }
