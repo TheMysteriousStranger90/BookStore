@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 
-namespace BookStore.Models
+namespace BookStore.Models.Validator
 {
     public class CustomUserValidator : IUserValidator<User>
     {

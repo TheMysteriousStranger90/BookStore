@@ -2,11 +2,13 @@
 using System.Threading.Tasks;
 using BookStore.Models;
 using BookStore.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookStore.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class UsersController : Controller
     {
         UserManager<User> _userManager;

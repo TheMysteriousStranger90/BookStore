@@ -1,12 +1,15 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using BookStore.Context;
 using BookStore.Interfaces;
 using BookStore.Mapping;
 using BookStore.Models;
+using BookStore.Models.Validator;
+using BookStore.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -15,6 +18,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 
 namespace BookStore
 {
@@ -57,22 +61,32 @@ namespace BookStore
                     opts.Password.RequireUppercase = false;
                     opts.Password.RequireDigit = false; 
                 })
-                .AddEntityFrameworkStores<ApplicationContext>();
+                .AddEntityFrameworkStores<ApplicationContext>().AddRoles<IdentityRole>();
             
+            services.AddAuthentication()
+                .AddCookie()
+                .AddJwtBearer(cfg =>
+                {
+                    cfg.TokenValidationParameters = new TokenValidationParameters()
+                    {
+                        ValidIssuer = Configuration["Tokens:Issuer"],
+                        ValidAudience = Configuration["Tokens:Audience"],
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Tokens:Key"]))
+                    };
+                });
             
+            services.AddDbContext<ApplicationContext>();
+            services.AddTransient<IMailService, NullMailService>();
             
-            
+            services.AddHttpContextAccessor();
             
             services.AddControllersWithViews();
+            services.AddRazorPages();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            
-            
-            
-            
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -89,14 +103,20 @@ namespace BookStore
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    "{controller}/{action}/{id?}",
+                    new { controller = "Home", action = "Index" });
+
+                endpoints.MapRazorPages();
             });
+            
+            
         }
     }
 }

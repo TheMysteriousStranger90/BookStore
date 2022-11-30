@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using BookStore.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using BookStore.Models;
@@ -13,14 +14,37 @@ namespace BookStore.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IMailService _mailService;
+        //private readonly IBookRepository _repository;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IMailService mailService)
         {
             _logger = logger;
+            _mailService = mailService;
+            //_repository = repository;
         }
 
         public IActionResult Index()
         {
+            return View();
+        }
+        
+        [HttpGet("contact")]
+        public IActionResult Contact()
+        {
+            return View();
+        }
+
+        [HttpPost("contact")]
+        public IActionResult Contact(ContactViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                _mailService.SendMessage("lev.myshkin@outlook.com", model.Subject, $"From: {model.Email}, Message: {model.Message}");
+                ViewBag.UserMessage = "Mail Sent...";
+                ModelState.Clear();
+            }
+
             return View();
         }
 
