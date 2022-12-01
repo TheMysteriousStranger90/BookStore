@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -38,7 +39,6 @@ namespace BookStore
         {
             services.AddTransient<IUserValidator<User>, CustomUserValidator>();
             
-            
             var mapperConfig = new MapperConfiguration(mc =>
             {
                 mc.AddProfile(new AutomapperProfile());
@@ -49,9 +49,6 @@ namespace BookStore
             services.AddDbContext<ApplicationContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             
-            
-            //services.AddTransient<IMailService, NullMailService>();
- 
             services.AddIdentity<User, IdentityRole>(opts =>
                 {
                     opts.User.RequireUniqueEmail = true;
@@ -77,10 +74,19 @@ namespace BookStore
                     };
                 });
             
+            services.Configure<RequestLocalizationOptions>(options =>
+            {
+                options.DefaultRequestCulture = new RequestCulture("en-US");
+            });
+            
+            
+            
+            
             services.AddDbContext<ApplicationContext>();
             services.AddTransient<IMailService, NullMailService>();
             
             services.AddScoped<IBookRepository, BookRepository>();
+            services.AddScoped<IOrderRepository, OrderRepository>();
             
             services.AddHttpContextAccessor();
             
@@ -103,6 +109,11 @@ namespace BookStore
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            
+            app.UseRequestLocalization();
+            
+            
+            
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
@@ -121,8 +132,6 @@ namespace BookStore
 
                 endpoints.MapRazorPages();
             });
-            
-            
         }
     }
 }

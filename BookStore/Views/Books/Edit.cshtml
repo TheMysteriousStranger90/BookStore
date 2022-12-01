@@ -1,0 +1,46 @@
+﻿@model BookStore.Models.ViewModels.EditBookViewModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+<div class="col-md-6 offset-md-3">
+    <div class="card card-body bg-light">
+        <form asp-action="Edit" asp-controller="Books">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <input type="hidden" asp-for="Id"/>
+            </div>
+            <div class="form-group">
+                <label asp-for="Title" class="control-label">Title</label>
+                <input type="text" asp-for="Title" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <label asp-for="Year" class="control-label">Year</label>
+                <input type="number" asp-for="Year" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <label asp-for="Isbn" class="control-label">Isbn</label>
+                <input type="text" asp-for="Isbn" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <label asp-for="Publisher" class="control-label">Publisher</label>
+                <input type="text" asp-for="Publisher" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <label asp-for="Language" class="control-label">Language</label>
+                <input type="text" asp-for="Language" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <label asp-for="Genre" class="control-label">Genre</label>
+                <input type="text" asp-for="Genre" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label">Price</label>
+                <input type="number" placeholder="1.0" step="0.01" asp-for="Price" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-outline-secondary"/>
+            </div>
+        </form>
+    </div>
+</div>

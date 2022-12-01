@@ -22,8 +22,17 @@
                     <div class="form-group">
                         <button id="buyButton" class="btn btn-primary">Buy</button>
                     </div>
+                    @if (User.IsInRole("Administrator"))
+                    {
+                        <form asp-action="Delete" asp-route-id="@b.Id" method="post">
+                            <a class="btn btn-sm btn-primary" asp-action="Edit" asp-route-id="@b.Id">Edit</a>
+                            <button type="submit" class="btn btn-sm btn-danger">
+                                Delete
+                            </button>
+                        </form>
+                    }
                 }
             </div>
         </div>
     }
-    </div>
+</div>
