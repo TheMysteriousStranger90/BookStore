@@ -19,13 +19,16 @@ namespace BookStore.Seed
             {
                 await roleManager.CreateAsync(new IdentityRole("Administrator"));
             }
+
             if (await roleManager.FindByNameAsync("User") == null)
             {
                 await roleManager.CreateAsync(new IdentityRole("User"));
             }
+
             if (await userManager.FindByNameAsync(adminEmail) == null)
             {
-                User admin = new User { FirstName = "Lev", LastName = "Myshkin", Email = adminEmail, UserName = adminEmail };
+                User admin = new User
+                    { FirstName = "Lev", LastName = "Myshkin", Email = adminEmail, UserName = adminEmail };
                 IdentityResult result = await userManager.CreateAsync(admin, password);
                 if (result.Succeeded)
                 {
@@ -33,7 +36,6 @@ namespace BookStore.Seed
                 }
             }
         }
-
 
         public static void SeedData(ModelBuilder modelBuilder)
         {
@@ -43,27 +45,32 @@ namespace BookStore.Seed
                     Id = 1, Title = "Fyodor Dostoevsky - Demons",
                     Author = new List<Author>()
                     {
-                        new Author {Name = "Fyodor Dostoevsky"}
+                        new Author { Name = "Fyodor Dostoevsky" }
                     },
-                    Year = 2008, Isbn = "978-0141441412", Publisher = "Penguin Classics", Language = "English", Genre = "Classic Literature & Fiction", Price = new decimal(14.00)
+                    Year = 2008, Isbn = "978-0141441412", Publisher = "Penguin Classics", Language = "English",
+                    Genre = "Classic Literature & Fiction", Price = new decimal(14.00)
                 },
                 new Book()
                 {
                     Id = 2, Title = "Jane Austen - Emma",
                     Author = new List<Author>()
                     {
-                        new Author {Name = "Jane Austen"}
+                        new Author { Name = "Jane Austen" }
                     },
-                    Year = 2020, Isbn = "978-1840227963", Publisher = "Wordsworth Editions Ltd", Language = "English", Genre = "Classic Literature & Fiction", Price = new decimal(12.00)
+                    Year = 2020, Isbn = "978-1840227963", Publisher = "Wordsworth Editions Ltd", Language = "English",
+                    Genre = "Classic Literature & Fiction", Price = new decimal(12.00)
                 },
                 new Book()
                 {
-                    Id = 3, Title = "Andrew Troelsen, Phillip Japikse - Pro C# 9 with .NET 5: Foundational Principles and Practices in Programming 10th ed. Edition",
+                    Id = 3,
+                    Title =
+                        "Andrew Troelsen, Phillip Japikse - Pro C# 9 with .NET 5: Foundational Principles and Practices in Programming 10th ed. Edition",
                     Author = new List<Author>()
                     {
-                        new Author {Name = "Andrew Troelsen"}, new Author() {Name = "Phillip Japikse"}
+                        new Author { Name = "Andrew Troelsen" }, new Author() { Name = "Phillip Japikse" }
                     },
-                    Year = 2021, Isbn = "978-1484269381", Publisher = "Apress", Language = "English", Genre = "Programming Languages", Price = new decimal(28.00)
+                    Year = 2021, Isbn = "978-1484269381", Publisher = "Apress", Language = "English",
+                    Genre = "Programming Languages", Price = new decimal(28.00)
                 }
             );
         }

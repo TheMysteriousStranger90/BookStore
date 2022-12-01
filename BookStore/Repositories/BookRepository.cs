@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using BookStore.Context;
 using BookStore.Interfaces;
@@ -16,6 +17,20 @@ namespace BookStore.Repositories
         {
             return _context.Set<Book>().Where(p => p.Genre == genre)
                 .ToList();
+        }
+
+        public IEnumerable<Book> GetAllBooks()
+        {
+            try
+            {
+                return _context.Set<Book>()
+                    .OrderBy(p => p.Title)
+                    .ToList();
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
     }
 }

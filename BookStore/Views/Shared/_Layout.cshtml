@@ -10,6 +10,9 @@
 <body>
 <header>
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <div class="flex1">
+            <img src="android-chrome-512x512.png" width="25" height="25" alt="Logo">
+            </div>
         <div class="container">
             <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">BookStore</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -22,35 +25,38 @@
                         <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Books" asp-action="Index">Books</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" asp-controller="Home" asp-action="Contact">Contact</a>
+                        <a class="nav-link text-dark" asp-controller="Home" asp-action="Contact">Contact</a>
                     </li>
-                                @if (User.Identity.IsAuthenticated)
-                                {
-                                   
-                                    <li class="nav-item"><a class="nav-link" asp-controller="Account" asp-action="Logout">Logout</a></li>
-                                    
-                                    @if (User.IsInRole("Administrator"))
-                                    {
-                                        <ul class="navbar-nav  my-2 my-sm-0">
-                                        <li class="nav-item my-2 my-sm-0">
-                                            <a class="nav-link text-dark" asp-area="" asp-controller="Roles" asp-action="Index">Roles</a>
-                                        </li>
-                                        <li class="nav-item my-2 my-sm-0">
-                                            <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Index">Users</a>
-                                        </li>  
-                                            </ul>
-                                            }
-                                    
-                                }
-                                else
-                                {
-                                    <li class="nav-item"><a class="nav-link" asp-controller="Account" asp-action="Login">Sign In</a></li>
-                                    <li class="nav-item"><a class="nav-link" asp-controller="Account" asp-action="Register">Sign Up</a></li>
-                                }
                 </ul>
+                <div class="flex2 text-end d-none d-md-block">
+                    <ul class="navbar-nav flex-grow-1">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+
+                            @if (User.IsInRole("Administrator"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Roles" asp-action="Index">Roles</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Index">Users</a>
+                                </li>
+                            }
+                            <li class="nav-item"><a class="nav-link" asp-controller="Account" asp-action="Logout">Logout</a></li>
+                        }
+                        else
+                        {
+                            <li class="nav-item"><a class="nav-link" asp-controller="Account" asp-action="Login">Sign In</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-controller="Account" asp-action="Register">Sign Up</a></li>
+                        }
+                    </ul>
+                </div>
             </div>
         </div>
     </nav>
@@ -62,8 +68,8 @@
 </div>
 
 <footer class="border-top footer text-muted">
-    <div class="container">
-        &copy; 2022 - BookStore - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <div class="text-center">
+        &copy; 2022 - Bohdan Harabadzhyu - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
     </div>
 </footer>
 <script src="~/lib/jquery/dist/jquery.min.js"></script>

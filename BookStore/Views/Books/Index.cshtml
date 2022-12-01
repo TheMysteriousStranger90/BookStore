@@ -1,0 +1,29 @@
+﻿@model IEnumerable<Book>
+<h5>Books</h5>
+<p>Count: @Model.Count()</p>
+
+<div class="container">
+    @foreach (var b in Model)
+    {
+        <div class="col-md-6 offset-md-3">
+            <div class="card card-body bg-light">
+                <img src="~/img/@(b.Isbn).jpg" class="img-fluid" alt="@b.Title" width="200" height="100"/>
+                <h6>@b.Title</h6>
+                <ul class="products-props">
+                    <li>Price: $@b.Price</li>
+                    <li>Publisher: @b.Publisher</li>
+                    <li>ISBN: @b.Isbn </li>
+                    <li>Language: @b.Language</li>
+                    <li>Genre: @b.Genre</li>
+                    <li>Year: @b.Year</li>
+                </ul>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <div class="form-group">
+                        <button id="buyButton" class="btn btn-primary">Buy</button>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+    </div>

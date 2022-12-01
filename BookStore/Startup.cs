@@ -9,6 +9,7 @@ using BookStore.Interfaces;
 using BookStore.Mapping;
 using BookStore.Models;
 using BookStore.Models.Validator;
+using BookStore.Repositories;
 using BookStore.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -19,6 +20,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 
 namespace BookStore
 {
@@ -78,9 +80,13 @@ namespace BookStore
             services.AddDbContext<ApplicationContext>();
             services.AddTransient<IMailService, NullMailService>();
             
+            services.AddScoped<IBookRepository, BookRepository>();
+            
             services.AddHttpContextAccessor();
             
-            services.AddControllersWithViews();
+            services.AddControllersWithViews()
+                .AddRazorRuntimeCompilation()
+                .AddNewtonsoftJson(cfg => cfg.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
             services.AddRazorPages();
         }
 

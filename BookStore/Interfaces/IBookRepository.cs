@@ -6,5 +6,7 @@ namespace BookStore.Interfaces
     public interface IBookRepository : IRepository<Book>
     {
         IEnumerable<Book> GetBooksByGenre(string genre);
+
+        IEnumerable<Book> GetAllBooks();
     }
 }

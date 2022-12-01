@@ -17,7 +17,7 @@ namespace BookStore.Repositories
         {
             if (includeItems)
             {
-                return  _context.Set<Order>()
+                return _context.Set<Order>()
                     .Include(o => o.Items)
                     .ThenInclude(i => i.Book)
                     .Where(o => o.User.Email == email)

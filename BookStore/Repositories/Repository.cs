@@ -37,12 +37,12 @@ namespace BookStore.Repositories
         {
             _set.Remove(entity);
         }
-        
+
         public void Update(TEntity entity)
         {
             _set.Update(entity);
         }
-        
+
         public bool SaveAll()
         {
             return _context.SaveChanges() > 0;
