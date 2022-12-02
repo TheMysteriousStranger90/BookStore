@@ -11,8 +11,6 @@ using Microsoft.Extensions.Logging;
 
 namespace BookStore.Controllers
 {
-    //[Route("api/[Controller]")]
-    //[ApiController]
     [Produces("application/json")]
     public class BooksController : Controller
     {
@@ -26,8 +24,6 @@ namespace BookStore.Controllers
         }
 
         [HttpGet]
-        [ProducesResponseType(200)]
-        [ProducesResponseType(400)]
         public IActionResult Index()
         {
             try
@@ -42,10 +38,22 @@ namespace BookStore.Controllers
             }
         }
         
-        
-        
-        
-        
+        public IActionResult Create() => View();
+
+        [HttpPost]
+        public async Task<IActionResult> Create(Book model)
+        {
+            if (model != null)
+            {
+                _repository.CreateAsync(model);
+      
+                if (_repository.SaveAll())
+                {
+                    return RedirectToAction("Index");
+                }
+            }
+            return View(model);
+        }
         
         public async Task<IActionResult> Edit(int id)
         {
@@ -98,6 +106,7 @@ namespace BookStore.Controllers
             if (book != null)
             {
                 _repository.Remove(book);
+                _repository.SaveAll();
             }
             return RedirectToAction("Index");
         }

@@ -35,4 +35,8 @@
             </div>
         </div>
     }
+    @if (User.IsInRole("Administrator"))
+    {
+        <a asp-action="Create">Add new book</a>
+    }
 </div>
