@@ -19,9 +19,11 @@
                 </ul>
                 @if (User.Identity.IsAuthenticated)
                 {
+                    <form asp-action="AddItem" asp-controller="Orders" asp-route-id="@b.Id" method="post">
                     <div class="form-group">
                         <button id="buyButton" class="btn btn-primary">Buy</button>
                     </div>
+                    </form>
                     @if (User.IsInRole("Administrator"))
                     {
                         <form asp-action="Delete" asp-route-id="@b.Id" method="post">

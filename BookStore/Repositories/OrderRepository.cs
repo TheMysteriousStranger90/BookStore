@@ -30,5 +30,14 @@ namespace BookStore.Repositories
                     .ToList();
             }
         }
+        
+        public Order GetOrderById(string username, int id)
+        {
+            return _context.Set<Order>()
+                .Include(o => o.Items)
+                .ThenInclude(i => i.Book)
+                .Where(o => o.Id == id && o.User.UserName == username)
+                .FirstOrDefault();
+        }
     }
 }

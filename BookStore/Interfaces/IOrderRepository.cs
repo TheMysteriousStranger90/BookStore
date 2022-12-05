@@ -6,5 +6,6 @@ namespace BookStore.Interfaces
     public interface IOrderRepository : IRepository<Order>
     {
         IEnumerable<Order> GetOrdersByUserEmail(string email, bool includeItems);
+        Order GetOrderById(string username, int id);
     }
 }

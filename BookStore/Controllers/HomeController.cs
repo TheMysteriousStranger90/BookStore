@@ -15,13 +15,11 @@ namespace BookStore.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IMailService _mailService;
-        //private readonly IBookRepository _repository;
 
         public HomeController(ILogger<HomeController> logger, IMailService mailService)
         {
             _logger = logger;
             _mailService = mailService;
-            //_repository = repository;
         }
 
         public IActionResult Index()

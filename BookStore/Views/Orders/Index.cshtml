@@ -1,0 +1,17 @@
+﻿@model Order
+
+@{
+    ViewBag.Title = "Order";
+}
+
+<div class="col-md-6 offset-md-3">
+    <div class="card card-body bg-light">
+        <form asp-action="Index" asp-controller="Orders">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <h5 class="display-6">Your order has been completed</h5>
+            <div class="form-group">
+                <a asp-action="Index" asp-controller="Home" class="btn btn-primary">Return</a>
+            </div>
+        </form>
+    </div>
+</div>
